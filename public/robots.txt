@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /api
+
+Sitemap: https://gitprompt.vercel.app/sitemap.xml
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
