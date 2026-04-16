@@ -21,9 +21,12 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-white font-semibold mb-3">Contact</h3>
-            <p className="text-slate-400 text-sm">
-              Questions? Reach out through our website contact form.
+            <p className="text-slate-400 text-sm mb-2">
+              Follow us on X for updates and support:
             </p>
+            <a href="https://x.com/TrakorAI" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm">
+              @TrakorAI →
+            </a>
           </div>
         </div>
         <div className="border-t border-slate-700 pt-6 text-center text-slate-400 text-sm">

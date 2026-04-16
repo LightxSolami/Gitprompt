@@ -11,6 +11,9 @@ This tool lets you paste in any public GitHub repository URL and generates a syn
 - 🤖 **AI-powered** - Uses OpenRouter LLM to generate natural prompts
 - 📊 **Comprehensive analysis** - Fetches repo metadata, file structure, and README
 - 🎨 **Modern UI** - Built with Next.js, React, and Tailwind CSS
+- 📱 **Mobile responsive** - Works perfectly on all devices
+- 📜 **Google AdSense ready** - Privacy Policy, Terms of Service, robots.txt, and sitemap included
+- 📊 **Analytics ready** - Structured for Google Analytics integration
 
 ## Setup
 
@@ -106,6 +109,25 @@ src/
 
 3. **Prompt Generation**: LLM generates a natural-sounding prompt that could have created the repository
 
+## Google AdSense & Monetization
+
+This project is configured for Google AdSense monetization with all required compliance pages:
+
+- ✅ **Privacy Policy** - Available at `/privacy`
+- ✅ **Terms of Service** - Available at `/terms`
+- ✅ **robots.txt** - Configured for search engine crawling
+- ✅ **sitemap.xml** - Automatic sitemap for SEO
+- ✅ **Analytics-ready** - Pre-configured for Google Analytics
+
+### Getting Started with Monetization
+
+See [ADSENSE_SETUP.md](./ADSENSE_SETUP.md) for detailed instructions on:
+1. Setting up Google Search Console
+2. Configuring Google Analytics
+3. Deploying to production
+4. Applying for Google AdSense
+5. Adding ads to your site
+
 ## Future Enhancements
 
 - [ ] Caching of analyses
@@ -114,6 +136,7 @@ src/
 - [ ] Batch analysis for multiple repos
 - [ ] Export options (JSON, markdown)
 - [ ] Integration with popular LLM playgrounds
+- [ ] Google AdSense display ads integration
 
 ## License
 
