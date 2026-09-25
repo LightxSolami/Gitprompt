@@ -40,6 +40,27 @@ export async function getRepoMetadata(owner: string, repo: string): Promise<GitH
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      const retry = await fetch(`${GITHUB_API_BASE}/repos/${owner}/${repo}`, {
+        headers: { "Content-Type": "application/json" },
+      });
+      if (retry.ok) {
+        const data = await retry.json();
+        return {
+          name: data.name,
+          full_name: data.full_name,
+          description: data.description,
+          url: data.html_url,
+          language: data.language,
+          stars: data.stargazers_count,
+          forks: data.forks_count,
+          created_at: data.created_at,
+          updated_at: data.updated_at,
+          homepage: data.homepage,
+          topics: data.topics || [],
+        };
+      }
+    }
     throw new Error(`Failed to fetch repository metadata: ${response.statusText}`);
   }
 
@@ -70,6 +91,18 @@ export async function getReadme(owner: string, repo: string): Promise<string> {
     );
 
     if (!response.ok) {
+      if (response.status === 401) {
+        const retry = await fetch(
+          `${GITHUB_API_BASE}/repos/${owner}/${repo}/readme`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+        if (retry.ok) {
+          const data = await retry.json();
+          if (data.content) {
+            return Buffer.from(data.content, "base64").toString("utf-8");
+          }
+        }
+      }
       return "";
     }
 
@@ -101,6 +134,29 @@ export async function getFileTree(
     );
 
     if (!response.ok) {
+      if (response.status === 401) {
+        const retry = await fetch(
+          `${GITHUB_API_BASE}/repos/${owner}/${repo}/contents${path ? `/${path}` : ""}`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+        if (retry.ok) {
+          const data = await retry.json();
+          if (Array.isArray(data)) {
+            return data
+              .filter((item) => {
+                const name = item.name.toLowerCase();
+                return !["node_modules", ".git", "dist", "build", ".next", ".env"].includes(
+                  name
+                );
+              })
+              .map((item) => ({
+                name: item.name,
+                type: item.type as "file" | "dir",
+                path: item.path,
+              }));
+          }
+        }
+      }
       return [];
     }
 
